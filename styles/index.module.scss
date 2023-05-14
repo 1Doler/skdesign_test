@@ -1,0 +1,24 @@
+@import "./variable.scss";
+.btn {
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #789e6e;
+    color: #fff;
+    border: none;
+    margin-bottom: 20px;
+    cursor: pointer;
+    &:first-child {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    &:last-child {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+  .btn_activ {
+    background-color: $primary_color;
+  }
+}

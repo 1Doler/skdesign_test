@@ -1,0 +1,15 @@
+@import "../../styles/variable.scss";
+
+.rows {
+  border-bottom: 1px solid $primary_color;
+  cursor: pointer;
+  &:hover {
+    background-color: $gray;
+  }
+  &:nth-child(2n) {
+    background-color: #b9ddb0;
+    &:hover {
+      background-color: #9ac490;
+    }
+  }
+}

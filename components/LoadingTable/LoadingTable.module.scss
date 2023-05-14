@@ -1,0 +1,39 @@
+@import "../../styles/variable.scss";
+.container {
+  width: 100%;
+  .table {
+    display: flex;
+    flex-direction: column;
+
+    .row {
+      margin-bottom: 10px;
+      height: 15px;
+      width: 70%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(-45deg, #b1aead, #555454, #abb4b8);
+      background-size: 400% 400%;
+      animation: gradient 6s ease infinite;
+      &:nth-child(2n) {
+        animation: gradient 6s ease infinite;
+        width: 80%;
+      }
+      &:nth-child(3n) {
+        animation: gradient 6s ease infinite;
+        width: 60%;
+      }
+    }
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

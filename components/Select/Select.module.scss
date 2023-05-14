@@ -1,0 +1,18 @@
+@import "../../styles/variable.scss";
+
+.select_headers {
+  font-size: 14px;
+  border: none;
+  border-bottom: 1px solid $disabled_gray;
+  background-color: $gray;
+  &:focus {
+    border: none;
+    border-bottom: 1px solid $primary_color;
+  }
+  &:active,
+  &:hover,
+  &:focus {
+    outline: 0;
+    outline-offset: 0;
+  }
+}

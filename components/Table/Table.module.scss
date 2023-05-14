@@ -1,0 +1,49 @@
+@import "../../styles/variable.scss";
+.filter_form {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+
+  .btn {
+    width: 40px;
+    border: none;
+    border-top-right-radius: 10px;
+    background-color: $primary_color;
+    cursor: pointer;
+    &:active,
+    &:hover,
+    &:focus {
+      outline: 0;
+      outline-offset: 0;
+    }
+    &:hover {
+      background: #b9ddb0;
+    }
+  }
+}
+.table {
+  width: 100%;
+  margin-bottom: 20px;
+  .not_data {
+    td {
+      text-align: center;
+      background-color: $gray;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
+}
+.modal_btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: #b9ddb0;
+  }
+}
