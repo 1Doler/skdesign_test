@@ -11,15 +11,13 @@
       width: 70%;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      background: linear-gradient(-45deg, #b1aead, #555454, #abb4b8);
+      background: linear-gradient(90deg, #b1aead 0%, #555454 50%, #abb4b8 100%);
       background-size: 400% 400%;
-      animation: gradient 6s ease infinite;
+      animation: gradient 4s ease infinite;
       &:nth-child(2n) {
-        animation: gradient 6s ease infinite;
         width: 80%;
       }
       &:nth-child(3n) {
-        animation: gradient 6s ease infinite;
         width: 60%;
       }
     }

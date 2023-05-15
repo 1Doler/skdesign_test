@@ -2,9 +2,20 @@ import { useMemo } from "react";
 
 import styles from "./Select.module.scss";
 
-export const Select = ({ headers, setFilter }) => {
+interface ISelectFilter {
+  text: string;
+  order: string;
+  isFiltered: number;
+}
+
+interface ISelectProps {
+  headers: { key: string; label: string }[];
+  setFilter: any;
+}
+
+export const Select: React.FC<ISelectProps> = ({ headers, setFilter }) => {
   const onChange = (value: string) => {
-    setFilter((prev) => {
+    setFilter((prev: ISelectFilter) => {
       const updatedFilter = { ...prev, order: value };
       return updatedFilter;
     });

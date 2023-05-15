@@ -13,13 +13,27 @@ interface TableRowProps {
 
 export const TableRows: React.FC<TableRowProps> = ({ user }) => {
   const dispatch = useDispatch<AppDispatch>();
-  return (
-    <tr className={styles.rows} onClick={() => dispatch(getUser(user.id))}>
-      <td>{user.id}</td>
-      <td>{user.firstName}</td>
-      <td>{user.lastName}</td>
-      <td>{user.email}</td>
-      <td>{user.phone}</td>
-    </tr>
-  );
+
+  if (user) {
+    const { id, firstName, lastName, email, phone } = user;
+    const handleClick = () => {
+      try {
+        dispatch(getUser(id));
+      } catch (error) {
+        console.error("Произошла ошибка:", error);
+      }
+    };
+
+    return (
+      <tr className={styles.rows} onClick={() => handleClick()}>
+        <td>{id}</td>
+        <td>{firstName}</td>
+        <td>{lastName}</td>
+        <td>{email}</td>
+        <td>{phone}</td>
+      </tr>
+    );
+  } else {
+    return <tr>NOT DATA</tr>;
+  }
 };

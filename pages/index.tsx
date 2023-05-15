@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import { Table, Pagination } from "../components/index";
 
@@ -10,22 +10,24 @@ import { InfoUser } from "../components/InfoUser/InfoUser";
 import styles from "../styles/index.module.scss";
 
 const Home = () => {
-  const [currentPage, setCurrentPage] = useState<Number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [pagesToShow, setPagesToShow] = useState(5);
-  const [filterUsers, setFilterUsers] = useState([]);
   const [typeData, setTypeData] = useState(null);
   const { lengthItems, status, items, item } = useSelector(
     (state: RootState) => state.users
   );
 
   const dispatch = useDispatch<AppDispatch>();
-  const onClick = (type: string) => {
-    setTypeData(type);
-    setCurrentPage(1);
-    setPagesToShow(5);
+  const onClick = useCallback(
+    (type: string) => {
+      setTypeData(type);
+      setCurrentPage(1);
+      setPagesToShow(5);
 
-    dispatch(fetchUsers({ type }));
-  };
+      dispatch(fetchUsers({ type }));
+    },
+    [dispatch]
+  );
   return (
     <div>
       <div className={styles.btn}>
@@ -47,10 +49,8 @@ const Home = () => {
       <Table
         items={items}
         status={status}
-        currentPage={currentPage}
         startPage={Number(currentPage) * pagesToShow - pagesToShow}
         pagesToShow={pagesToShow}
-        setFilterUsers={setFilterUsers}
         setCurrentPage={setCurrentPage}
       />
       {status !== "loading" && (

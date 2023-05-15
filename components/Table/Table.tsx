@@ -17,28 +17,40 @@ import { Modal } from "../Modal/Modal";
 import { LoadingTable } from "../LoadingTable/LoadingTable";
 import styles from "./Table.module.scss";
 
-export const Table = ({
-  currentPage,
+interface Props {
+  pagesToShow: number;
+  status: string;
+  setCurrentPage: (page: number) => void;
+  items: IUser[];
+  startPage: number;
+}
+
+export const Table: React.FC<Props> = ({
   pagesToShow,
   status,
-  setFilterUsers,
   setCurrentPage,
   items,
   startPage,
 }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [sortOrder, setSortOrder] = useState({ column: null, direction: null });
-  const [showItems, setShowItems] = useState([]);
-  const [isShowModal, setIsShowModal] = useState(false);
-  const [filter, setFilter] = useState({
+  const [sortOrder, setSortOrder] = useState<{
+    column: string | null;
+    direction: string | null;
+  }>({ column: null, direction: null });
+  const [showItems, setShowItems] = useState<IUser[]>([]);
+  const [isShowModal, setIsShowModal] = useState<boolean>(false);
+  const [filter, setFilter] = useState<{
+    text: string;
+    order: string;
+    isFiltered: number;
+  }>({
     text: "",
     order: "id",
     isFiltered: -1,
   });
 
   useEffect(() => {
-    console.log("render uses");
     setFilter({ text: "", order: "id", isFiltered: -1 });
     setShowItems(items);
     setSortOrder({ column: "", direction: "" });
@@ -52,12 +64,12 @@ export const Table = ({
       );
     setShowItems(sortItems);
   };
+
   const onFilter = () => {
-    const normalizedFilterText = filter.text.toLowerCase();
+    const { text, order } = filter;
+    const normalizedFilterText = text.toLowerCase();
     const filteredItems = items.filter((item: IUser) => {
-      return String(item[filter.order])
-        .toLowerCase()
-        .includes(normalizedFilterText);
+      return String(item[order]).toLowerCase().includes(normalizedFilterText);
     });
     dispatch(updateLength(filteredItems.length));
     setShowItems(filteredItems);
@@ -117,7 +129,12 @@ export const Table = ({
             ) : (
               showItems
                 .slice(startPage, startPage + pagesToShow)
-                .map((user) => <TableRows user={user} key={user.id} />)
+                .map((user) => (
+                  <TableRows
+                    user={user}
+                    key={user.id + user.lastName + user.firstName}
+                  />
+                ))
             )}
           </tbody>
         </table>

@@ -4,9 +4,9 @@ import styles from "./TableHeader.module.scss";
 
 interface ITableHeaderProps {
   headers: { key: string; label: string }[];
-  sortOrder: { column: string; direction: "desc" | "asc" };
-  setSortOrder: any;
-  onSort: any;
+  sortOrder: { column: string | null; direction: string | null };
+  setSortOrder: (sortOrder: { column: string; direction: string }) => void;
+  onSort: (column: string, dir: string) => void;
 }
 
 export const TableHeader: React.FC<ITableHeaderProps> = ({
@@ -21,10 +21,8 @@ export const TableHeader: React.FC<ITableHeaderProps> = ({
         ...sortOrder,
         direction: sortOrder.direction === "asc" ? "desc" : "asc",
       });
-      console.log(column, sortOrder.direction === "asc" ? "desc" : "asc");
       onSort(column, sortOrder.direction === "asc" ? "desc" : "asc");
     } else {
-      console.log(column, "asc");
       setSortOrder({ column, direction: "asc" });
       onSort(column, "asc");
     }

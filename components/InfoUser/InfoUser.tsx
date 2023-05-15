@@ -1,7 +1,11 @@
 import { IUser } from "../Interface";
 import styles from "./InfoUser.module.scss";
 
-export const InfoUser = ({ user }) => {
+interface InfoUserProps {
+  user: IUser;
+}
+
+export const InfoUser = ({ user }: InfoUserProps) => {
   const { firstName, lastName, description, address } = user;
   return (
     <div className={styles.info_module}>

@@ -8,6 +8,7 @@ function App({ Component, pageProps }) {
     <Provider store={store}>
       <Head>
         <title>My new cool app</title>
+        <meta lang="en" />
         <meta name="description" content="SKDESIGN FRONTEND TEST" />
         <meta charSet="UTF-8" />
       </Head>

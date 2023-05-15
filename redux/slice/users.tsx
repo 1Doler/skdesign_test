@@ -17,7 +17,8 @@ export const fetchUsers = createAsyncThunk<IUser[], FetchUsersArg>(
       const { data } = await axios.get(url);
       return data;
     } catch (err) {
-      return rejectWithValue("Произошла ошибка");
+      console.log(err);
+      return rejectWithValue("Error");
     }
   }
 );
@@ -50,20 +51,21 @@ const usersSlice = createSlice({
       state.lengthItems = newItems.length;
     },
   },
-  extraReducers: {
-    [`${fetchUsers.pending}`]: (state) => {
-      state.status = "loading";
-    },
-    [`${fetchUsers.fulfilled}`]: (state, action) => {
-      state.items = action.payload;
-      state.lengthItems = action.payload.length;
-      state.item = {} as IUser;
-      state.status = "loaded";
-    },
-    [`${fetchUsers.rejected}`]: (state) => {
-      state.items = [];
-      state.status = "error";
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUsers.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.items = action.payload;
+        state.lengthItems = action.payload.length;
+        state.item = {} as IUser;
+        state.status = "loaded";
+      })
+      .addCase(fetchUsers.rejected, (state) => {
+        state.items = [];
+        state.status = "error";
+      });
   },
 });
 
